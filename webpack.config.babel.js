@@ -1,7 +1,6 @@
 import webpack from 'webpack';
 import path from 'path';
 const webpackConfig={
-	// context:__dirname,
 	entry: 
 	[
 	'./app/script/app.jsx'
@@ -12,12 +11,21 @@ const webpackConfig={
 		publicPath:'/build/',
 		filename: 'bundle.js'
 	},
-	devtool: 'inline-source-map',
+	devtool: 'cheap-module-eval-source-map',
 	resolve:{
 		modulesDirectory:['node_modules','app'],
 		extensions:['','.js','.jsx']
 	},
 	module: {
+		preLoaders: [
+	    	{
+		        test: /\.(js|jsx)$/,
+		        loaders: ['eslint'],
+		        include: [
+		          path.resolve(__dirname, "app"),
+		        ],
+	     	}
+	    ],
 		loaders: [
 			{
 				test: /\.(js|jsx)$/,
@@ -28,11 +36,15 @@ const webpackConfig={
 			{
                 test: /\.(scss|sass)$/,
                 loaders: ['style', 'css', 'sass']
+            },
+            {
+            	test: /\.json$/,
+            	loader: 'json'
             }
 		]
 	},
 	plugins:[
-		new webpack.NoErrorsPlugin()
+		new webpack.optimize.OccurenceOrderPlugin()
 	]
 };
 module.exports=webpackConfig;
