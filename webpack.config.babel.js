@@ -17,15 +17,15 @@ const webpackConfig={
 		extensions:['','.js','.jsx']
 	},
 	module: {
-		preLoaders: [
-	    	{
-		        test: /\.(js|jsx)$/,
-		        loaders: ['eslint'],
-		        include: [
-		          path.resolve(__dirname, "app"),
-		        ],
-	     	}
-	    ],
+        // preLoaders: [
+	    // 	{
+		 //        test: /\.(js|jsx)$/,
+		 //        loaders: ['eslint'],
+		 //        include: [
+		 //          path.resolve(__dirname, "app"),
+		 //        ],
+	    //  	}
+	    // ],
 		loaders: [
 			{
 				test: /\.(js|jsx)$/,
