@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import './../styles/auth-form.scss';
 import RaisedButton from 'material-ui/RaisedButton';
+import {Tabs, Tab} from 'material-ui/Tabs';
 import Checkbox from 'material-ui/Checkbox';
 
 const styles = {
@@ -15,27 +16,32 @@ const styles = {
 };
 
 export default class LoginForm extends Component {
-    render() {
-        return (<div className="auth-tab">
-                <TextField style={styles.input}
-                           value={this.props.value}
-                           hintText="E-mail"
-                           floatingLabelText="E-mail"
-                           type="email"
-                           floatingLabelFixed={false}
-                           floatingLabelFocusStyle={styles.label}
-                />
-                <TextField style={styles.input}
-                           value={this.props.value}
-                           hintText="Password"
-                           floatingLabelText="Password"
-                           type="password"
-                           floatingLabelFixed={false}
-                           floatingLabelFocusStyle={styles.label}
-                />
 
-                <div className="auth-btn"><RaisedButton label="Log in" primary={true}  /></div>
-            </div>
+    render() {
+        return (
+        <Tabs className="auth-container">
+            <Tab label="Log In" value="a">
+                <div className="auth-tab">
+                    <TextField style={styles.input}
+                               hintText="E-mail"
+                               floatingLabelText="E-mail"
+                               type="email"
+                               floatingLabelFixed={false}
+                               floatingLabelFocusStyle={styles.label}
+                    />
+                    <TextField style={styles.input}
+                               hintText="Password"
+                               floatingLabelText="Password"
+                               type="password"
+                               floatingLabelFixed={false}
+                               floatingLabelFocusStyle={styles.label}
+                    />
+
+                    <div className="auth-btn"><RaisedButton label="Log in" primary={true}  /></div>
+                </div>
+            </Tab>
+        </Tabs>
+
         );
     }
 
