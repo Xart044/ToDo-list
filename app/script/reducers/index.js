@@ -1,9 +1,11 @@
-import {combineReducers} from 'redux';
-import TaskReducer from './tasks-reducer';
+import {combineReducers} from 'redux'
+import page from './page'
+import user from './user'
 
+export default combineReducers(
+    {
+        page,
+        user
+    }
+)
 
-const allReducers = combineReducers({
-    tasks: TaskReducer,
-});
-
-export default allReducers

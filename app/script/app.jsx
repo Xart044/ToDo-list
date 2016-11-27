@@ -1,17 +1,20 @@
-import React from 'react';
+import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {crateStore} from 'redux';
 import {Provider} from 'react-redux';
-import allReducers from './reducers';
-import Layout from './components/Layout.jsx';
+import configureStore from './store/configureStore';
+import Layout from './containers/Layout.jsx';
+require ('./styles.scss');
 
-const store = createStore(allReducers);
-
-const App = document.getElementById('App')
+const App = document.getElementById('App');
+const store = configureStore();
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Layout/>
+    <Provider store = {store}>
+        <div className="app">
+            <Layout/>
+        </div>
+
     </Provider>,
-     App
+    App
 );
