@@ -17,18 +17,21 @@ export default class SignInForm extends Component {
     render(){
         return(<div className="auth-tab">
             <TextField style={styles.input}
+                       value={this.props.value}
                        hintText="User name"
                        floatingLabelText="Name"
                        floatingLabelFixed={false}
                        floatingLabelFocusStyle={styles.label}
             />
             <TextField style={styles.input}
+                       value={this.props.value}
                        hintText="User surname"
                        floatingLabelText="Name"
                        floatingLabelFixed={false}
                        floatingLabelFocusStyle={styles.label}
             />
             <TextField style={styles.input}
+                       value={this.props.value}
                        hintText="E-mail"
                        floatingLabelText="E-mail"
                        type="email"
@@ -36,6 +39,7 @@ export default class SignInForm extends Component {
                        floatingLabelFocusStyle={styles.label}
             />
             <TextField style={styles.input}
+                       value={this.props.value}
                        hintText="Password"
                        floatingLabelText="Password"
                        type="password"
@@ -43,6 +47,7 @@ export default class SignInForm extends Component {
                        floatingLabelFocusStyle={styles.label}
             />
             <TextField style={styles.input}
+                       value={this.props.value}
                        hintText="Confirm your password"
                        floatingLabelText="Confirm password"
                        type="password"
