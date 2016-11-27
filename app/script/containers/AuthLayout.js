@@ -24,11 +24,11 @@ export default class AuthLayout extends Component {
         return (
             <Tabs className="auth-container" value={this.state.value} onChange={this.handleChange}>
                 <Tab label="Log In" value="a">
-                        <LoginForm />
+                    <LoginForm />
                 </Tab>
-                <Tab label="Sign In" value="b">
-                    <SignInForm/>
-                </Tab>
+                {/*<Tab label="Sign Up" value="b">*/}
+                    {/*<SignInForm />*/}
+                {/*</Tab>*/}
             </Tabs>
         );
     }
