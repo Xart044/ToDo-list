@@ -26,7 +26,7 @@ export default class AuthLayout extends Component {
                 <Tab label="Log In" value="a">
                         <LoginForm />
                 </Tab>
-                <Tab label="Sign In" value="b">
+                <Tab label="Sign Up" value="b">
                     <SignInForm/>
                 </Tab>
             </Tabs>
