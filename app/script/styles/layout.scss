@@ -1,0 +1,17 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+html,body{
+	height: 100%;
+}
+body{
+	font-family: 'Roboto', Helvetica, Arial, sans-serif;
+	line-height: 1.8em;
+	letter-spacing: 0.5px;
+}
+#App{
+	height: 100%;
+	width: 100%;
+}

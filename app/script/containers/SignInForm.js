@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import TextField from 'material-ui/TextField';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
-import './../styles/auth-form.scss';
+import './../styles/auth.scss';
 
 const styles = {
     label: {
