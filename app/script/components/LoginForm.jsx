@@ -22,7 +22,6 @@ const styles = {
 };
 
 export default class LoginForm extends Component {
-
     render() {
         return (
             <div className="login-wrapper">

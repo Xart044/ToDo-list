@@ -7,10 +7,10 @@ import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 //componetns
-import Layout from './components/Layout.jsx';
-import AuthLayout from './containers/AuthLayout.jsx';
-import LoginForm from './containers/LoginForm'
-import SignInForm from './containers/SignInForm'
+import Layout from './components/Layout';
+import AuthLayout from './components/AuthLayout';
+import LoginForm from './components/LoginForm'
+import SignInForm from './components/SignInForm'
 
 //styles
 import './styles/layout.scss';
