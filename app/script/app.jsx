@@ -21,8 +21,6 @@ injectTapEventPlugin();
 const App = document.getElementById('App');
 const store = configureStore();
 
-configDB();
-
 ReactDOM.render(
         <Provider store={store}>
 			<Router history={hashHistory}>
