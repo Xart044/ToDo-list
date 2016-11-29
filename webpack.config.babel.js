@@ -3,7 +3,7 @@ import path from 'path';
 const webpackConfig={
 	entry: 
 	[
-	'./app/script/app.jsx'
+		'./app/script/app.jsx'
 	],
 	output: 
 	{
@@ -40,7 +40,11 @@ const webpackConfig={
             {
             	test: /\.json$/,
             	loader: 'json'
-            }
+            },
+			{
+				test: /\.(jpe?g|png|gif|svg|ico)$/i,
+				loader: 'file'
+			}
 		]
 	},
 	plugins:[
