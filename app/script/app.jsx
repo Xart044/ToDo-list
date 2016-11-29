@@ -5,6 +5,8 @@ import {Provider} from 'react-redux';
 import {Router,Route,IndexRoute,hashHistory} from 'react-router';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import configDB from './db.config';
+import * as firebase from 'firebase';
 
 //componetns
 import Layout from './components/Layout.jsx';
@@ -17,6 +19,7 @@ injectTapEventPlugin();
 const App = document.getElementById('App');
 const store = configureStore();
 
+configDB();
 
 ReactDOM.render(
         <Provider store={store}>
