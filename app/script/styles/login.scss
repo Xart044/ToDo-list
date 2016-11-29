@@ -1,7 +1,8 @@
 .login-wrapper {
   width: 100%;
-  height: 100vh;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-image: url("../../images/login-reg_bg.jpg");
@@ -9,7 +10,6 @@
 
   .auth-container {
     width: 30% !important;
-    //border: 1px solid rgba(0, 0, 0, 0.298039);;
     .auth-tab {
       padding: 0px 20px 20px 20px;
       background-color: white;
