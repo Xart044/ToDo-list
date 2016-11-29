@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
-import LoginForm from './LoginForm';
-import SignInForm from './SignInForm';
 import './../styles/auth.scss';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';

@@ -9,8 +9,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 //componetns
 import Layout from './components/Layout';
 import AuthLayout from './components/AuthLayout';
-import LoginForm from './components/LoginForm'
-import SignInForm from './components/SignInForm'
+import LoginForm from './containers/LoginForm'
+import SignInForm from './containers/SignInForm'
 
 //styles
 import './styles/layout.scss';
