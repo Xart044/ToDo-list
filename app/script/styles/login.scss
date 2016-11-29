@@ -1,0 +1,23 @@
+.login-wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("../../images/login-reg_bg.jpg");
+  background-size: cover;
+
+  .auth-container {
+    width: 30% !important;
+    //border: 1px solid rgba(0, 0, 0, 0.298039);;
+    .auth-tab {
+      padding: 0px 20px 20px 20px;
+      background-color: white;
+      .auth-btn {
+        display: flex;
+        margin-top: 10px;
+        justify-content: flex-end;
+      }
+    }
+  }
+}

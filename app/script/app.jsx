@@ -9,6 +9,8 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 //componetns
 import Layout from './components/Layout.jsx';
 import AuthLayout from './containers/AuthLayout.jsx';
+import LoginForm from './containers/LoginForm'
+import SignInForm from './containers/SignInForm'
 
 //styles
 import './styles/layout.scss';
@@ -23,6 +25,8 @@ ReactDOM.render(
 			<Router history={hashHistory}>
 				<Route path='/' component={Layout}>
 					<IndexRoute component={AuthLayout}></IndexRoute>
+					<Route path='/login' component={LoginForm}></Route>
+					<Route path='/register' component={SignInForm}></Route>
 					{/*<Route></Route>
 								Два роута на будущее
 								один для логин формы
