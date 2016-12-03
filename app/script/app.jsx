@@ -1,3 +1,4 @@
+//base
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {crateStore} from 'redux';
@@ -5,14 +6,18 @@ import {Provider} from 'react-redux';
 import {Router,Route,IndexRoute,hashHistory} from 'react-router';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+//DB
 import configDB from './db.config';
 import * as firebase from 'firebase';
 
 //componetns
 import Layout from './components/Layout';
 import AuthLayout from './components/AuthLayout';
-import LoginForm from './containers/LoginForm'
-import SignInForm from './containers/SignInForm'
+import LoginForm from './containers/LoginForm';
+import SignInForm from './containers/SignInForm';
+import UserLayout from './containers/UserLayout';
+import TaskCategoriesLayout from './containers/TaskCategoriesLayout';
 
 //styles
 import './styles/layout.scss';
@@ -28,11 +33,11 @@ ReactDOM.render(
 					<IndexRoute component={AuthLayout}></IndexRoute>
 					<Route path='/login' component={LoginForm}></Route>
 					<Route path='/register' component={SignInForm}></Route>
-					{/*<Route></Route>
-								Два роута на будущее
-								один для логин формы
-								другой для регистрации
-					<Route></Route>*/}
+					<Route path='/user' component={UserLayout}>
+					<IndexRoute component={TaskCategoriesLayout}></IndexRoute>s
+						{/*<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
+						*/}
+					</Route>
 				</Route>
 			</Router>
         </Provider>,

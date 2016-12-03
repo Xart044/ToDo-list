@@ -1,9 +1,14 @@
+//base
 import React, {Component} from 'react';
+import {Link} from 'react-router';
+
+//styles
+import '../styles/login.scss';
+
+//components
 import TextField from 'material-ui/TextField';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
-import '../styles/login.scss';
-import {Link} from 'react-router';
 
 const styles = {
     label: {

@@ -1,7 +1,12 @@
+//base
 import React, {Component} from 'react';
-import './../styles/auth.scss';
-import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router';
+
+//styles
+import './../styles/auth.scss';
+
+//components
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 export default class AuthLayout extends Component {
