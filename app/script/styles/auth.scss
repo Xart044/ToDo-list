@@ -6,7 +6,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: url('../../images/login-reg_bg.jpg') no-repeat;
+    background: url('../../images/auth_bg.jpg') no-repeat;
     color: #fff;
     background-size: 100% 100%;
 }
@@ -31,4 +31,14 @@
 	font-weight: bold;
 	text-transform: uppercase;
 	font-size: 100%;
+}
+
+.index-layout__container{
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.39);
+	border-radius: 10px;
+	padding: 20px;
+	display: flex;
+	flex-direction:column;
+	align-items:center;
 }
