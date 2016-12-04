@@ -1,6 +1,12 @@
+//base
 import React, {Component} from 'react';
+import {Link} from 'react-router';
+
+//styles 
+import '../styles/login.scss';
+
+//components
 import TextField from 'material-ui/TextField';
-import './../styles/login.scss';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Checkbox from 'material-ui/Checkbox';
@@ -48,7 +54,10 @@ export default class LoginForm extends Component {
                                       labelStyle={styles.label1}
                                       label="Remember me"
                             />
-                            <div className="auth-btn"><RaisedButton label="Log in" primary={true}/></div>
+                            <div className="auth-btn">
+                              <Link to="/register"><RaisedButton label="Go to register" secondary={true}/></Link>
+                              <RaisedButton label="Log in" primary={true}/>
+                            </div>
                         </div>
                     </Tab>
                 </Tabs>

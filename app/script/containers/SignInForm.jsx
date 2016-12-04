@@ -1,8 +1,14 @@
+//base
 import React, {Component} from 'react';
+import {Link} from 'react-router';
+
+//styles
+import '../styles/login.scss';
+
+//components
 import TextField from 'material-ui/TextField';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
-import './../styles/login.scss';
 
 const styles = {
     label: {
@@ -63,7 +69,10 @@ export default class SignInForm extends Component {
                                        required={true}
                                        floatingLabelFocusStyle={styles.label}
                             />
-                            <div className="auth-btn"><RaisedButton label="Register" primary={true}/></div>
+                            <div className="auth-btn">
+                                <Link to="/login"><RaisedButton label="Log in existed account" secondary={true}/></Link>                                
+                                <RaisedButton label="Register" primary={true}/>
+                            </div>
                         </div>
                     </Tab>
                 </Tabs>
