@@ -1,6 +1,8 @@
 //base
 import React from 'react';
-
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {handleSignOut} from '../actions/UserActions'
 
 //styles
 
@@ -20,7 +22,7 @@ const iconStyle = {
 	color: '#ffffff'
 };
 
-export default class UserMenu extends React.Component {
+class UserMenu extends React.Component {
   static propTypes = {
     name: React.PropTypes.string,
   };
@@ -47,8 +49,22 @@ export default class UserMenu extends React.Component {
 			anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
 		>
 			<MenuItem primaryText="Settings" />
-			<MenuItem primaryText="Sign out" />
+			<MenuItem primaryText="Sign out" onClick={()=>this.props.handleSignOut()}/>
 		</IconMenu>
     );
   }
 }
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        handleSignOut: bindActionCreators(handleSignOut, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);

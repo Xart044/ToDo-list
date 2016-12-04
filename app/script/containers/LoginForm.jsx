@@ -1,6 +1,9 @@
 //base
 import React, {Component} from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {handleLogin} from '../actions/UserActions'
 
 //styles 
 import '../styles/login.scss';
@@ -27,7 +30,8 @@ const styles = {
     }
 };
 
-export default class LoginForm extends Component {
+
+class LoginForm extends Component {
     render() {
         return (
             <div className="login-wrapper">
@@ -38,6 +42,7 @@ export default class LoginForm extends Component {
                                        hintText="E-mail"
                                        floatingLabelText="E-mail"
                                        type="email"
+                                       ref="email"
                                        floatingLabelFixed={false}
                                        required={true}
                                        floatingLabelFocusStyle={styles.label}
@@ -46,6 +51,7 @@ export default class LoginForm extends Component {
                                        hintText="Password"
                                        floatingLabelText="Password"
                                        type="password"
+                                       ref="pass"
                                        floatingLabelFixed={false}
                                        required={true}
                                        floatingLabelFocusStyle={styles.label}
@@ -56,7 +62,7 @@ export default class LoginForm extends Component {
                             />
                             <div className="auth-btn">
                               <Link to="/register"><RaisedButton label="Go to register" secondary={true}/></Link>
-                              <RaisedButton label="Log in" primary={true}/>
+                              <RaisedButton label="Log in" primary={true} onClick={() =>this.props.handleLogin(this.refs.email.getValue(), this.refs.pass.getValue())}/>
                             </div>
                         </div>
                     </Tab>
@@ -66,3 +72,17 @@ export default class LoginForm extends Component {
     }
 
 }
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        handleLogin: bindActionCreators(handleLogin, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);
