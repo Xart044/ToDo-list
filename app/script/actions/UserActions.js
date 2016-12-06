@@ -1,62 +1,104 @@
 import {
     LOGIN_SUCCES,
     LOGIN_FAIL,
+    REGISTR_SUCCES,
+    REGISTER_FAIL,
     SIGNOUT_SUCCESS
 } from '../constants/User'
 import {hashHistory} from 'react-router';
-import {firebaseAuth} from '../db.config';
+import {ref,firebaseAuth} from './../db.config';
+
+export const HandleLoginWithoutPass = (user) => {
+    return function(dispatch) {
+        const usersRef = ref.child('users'),
+        userRef = usersRef.child(user.uid);
+        userRef.once('value')
+        .then((snap) => {
+            return snap.val();
+        })
+        .then((val)=>{
+            dispatch({
+                type: LOGIN_SUCCES,
+                email: user.email,
+                name: val.name,
+                surname: val.surname,
+            });
+            hashHistory.push('/user');
+        })
+        .catch((e)=>{
+            console.log(e);
+        })      
+    }   
+}
 
 export const handleLogin = (email, pass) => {
-
     return function(dispatch) {
-        console.log(email, pass);
-
         firebaseAuth.signInWithEmailAndPassword(email, pass)
-            .then(()=>{
+        .then((user)=>{
+            const usersRef = ref.child('users'),
+            userRef = usersRef.child(user.uid);
+            userRef.once('value')
+            .then((snap) => {
+                return snap.val();
+            })
+            .then((val)=>{
                 dispatch({
                     type: LOGIN_SUCCES,
-                    payload: email,
-
+                    email: email,
+                    name: val.name,
+                    surname: val.surname,
                 });
                 hashHistory.push('/user');
-                console.log("yes");
             })
-            .catch(e=>{
-                dispatch({
-                    type: LOGIN_FAIL,
-                    error: e.message
-                });
+        })
+        .catch(e=>{
+            dispatch({
+                type: LOGIN_FAIL,
+                error: e.message,
             });
-
-
-        // VK.Auth.login((r) => {
-        //     if (r.session) {
-        //         let username = r.session.user.first_name;
-        //
-        //         dispatch({
-        //             type: LOGIN_SUCCES,
-        //             payload: username
-        //         })
-        //
-        //     } else {
-        //         dispatch({
-        //             type: LOGIN_FAIL,
-        //             error: true,
-        //             payload: new Error('Ошибка авторизации')
-        //         })
-        //     }
-        // },4);
-    }
-
-};
-export const handleSignOut = () => {
-
-    return function (dispatch) {
-        firebaseAuth.signOut();
-        dispatch({
-            type: SIGNOUT_SUCCESS
         });
-        console.log('logout');
-        hashHistory.push('/');
+    }
+};
+
+export const handleSignIn = (email,pass,name,surname) => {
+    return function(dispatch){
+        firebaseAuth.createUserWithEmailAndPassword(email,pass)
+        .then((user)=>{
+            dispatch({
+                type: REGISTR_SUCCES,
+                email: email,
+                name: name,
+                surname: surname,
+            });
+            const usersRef = ref.child('users'),
+            userRef = usersRef.child(user.uid);
+            userRef.set({
+              name: name,
+              surname: surname,
+              notes: []
+            })
+            hashHistory.push('/user');
+        })
+        .catch((e)=>{
+            dispatch({
+                type: REGISTER_FAIL,
+                error: e.message,
+            });
+        })
+    }
+};
+
+export const handleSignOut = () => {
+    return function (dispatch) {
+        firebaseAuth.signOut()
+        .then(()=>{
+            dispatch({
+                type: SIGNOUT_SUCCESS
+            });
+            hashHistory.push('/login');
+        })
+        .catch((e)=>{
+            console.log(e);        
+        })
     };
 };

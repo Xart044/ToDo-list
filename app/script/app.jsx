@@ -7,10 +7,6 @@ import {Router,Route,IndexRoute,hashHistory} from 'react-router';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-//DB
-import configDB from './db.config';
-import * as firebase from 'firebase';
-
 //componetns
 import Layout from './components/Layout';
 import AuthLayout from './components/AuthLayout';

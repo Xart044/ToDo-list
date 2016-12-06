@@ -1,11 +1,15 @@
 import {
     LOGIN_SUCCES,
     LOGIN_FAIL,
+    REGISTR_SUCCES,
+    REGISTER_FAIL,
     SIGNOUT_SUCCESS
 } from '../constants/User'
 
 const initialState = {
     name: '',
+    surname: '',
+    email: '',
     error: '',
     isLogged: false,
 };
@@ -13,15 +17,21 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type){
         case LOGIN_SUCCES:
-            return {...state, name: action.payload, isLogged: true};
+            return {...state, name: action.name, surname: action.surname, email: action.email, error: '', isLogged: true};
             break;
         case LOGIN_FAIL:
-            return {...state, error: action.error};
+            return {...state, name: '', surname: '', email: '', error: action.error, isLogged: false};
             break;
         case SIGNOUT_SUCCESS:
-            return {...state,name: '', isLogged: false}
+            return {...state, name: '', surname: '', email: '', error: '', isLogged: false};
+            break;
+        case REGISTR_SUCCES:
+            return {...state, name: action.name, surname: action.surname, email: action.email, error: '', isLogged: true};
+            break;
+        case REGISTER_FAIL:
+            return {...state, name: '', surname: '', email: '', error: action.error, isLogged: false};
+            break;
         default:
             return state;
     }
-
 }
