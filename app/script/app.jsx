@@ -6,6 +6,7 @@ import {Provider} from 'react-redux';
 import {Router,Route,IndexRoute,hashHistory} from 'react-router';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import {firebaseAuth} from './db.config'
 
 //componetns
 import Layout from './components/Layout';
@@ -29,8 +30,8 @@ ReactDOM.render(
 					<IndexRoute component={AuthLayout}></IndexRoute>
 					<Route path='/login' component={LoginForm}></Route>
 					<Route path='/register' component={SignInForm}></Route>
-					<Route path='/user' component={UserLayout}>
-					<IndexRoute component={TaskCategoriesLayout}></IndexRoute>s
+					<Route path='/user' component={UserLayout} onEnter={requireAuth}>
+					<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
 						{/*<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
 						*/}
 					</Route>
@@ -39,3 +40,17 @@ ReactDOM.render(
         </Provider>,
     App
 );
+
+
+
+function requireAuth(nextState, replace, callback) {
+    firebaseAuth.onAuthStateChanged(firebaseUser=>{
+        if(!firebaseUser){
+            replace('/');
+            callback();
+        }
+        else{
+            callback();
+		}
+    });
+}
