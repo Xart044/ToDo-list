@@ -15,7 +15,6 @@ class Layout extends Component {
 	componentWillMount() {
 		firebaseAuth.onAuthStateChanged(firebaseUser=>{
 			if(firebaseUser){
-                console.log('cwm');
 				this.props.HandleLoginWithoutPass(firebaseUser);
 				hashHistory.push('/user');
 			}

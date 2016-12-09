@@ -44,6 +44,7 @@ class SignInForm extends Component {
     }
 
     handleChange(e) {
+      this.setState({open: false});
         if (e.target.id == 'email') {
             if (!this.validateEmail(e.target.value)) {
                 this.setState({['errorText' + e.target.id]: 'Incorrect email'});
@@ -98,27 +99,16 @@ class SignInForm extends Component {
         }
 
         if (valid) {
-            /*fix*/
-            Promise.resolve(this.props.handleSignIn(email, pass, name_f, surname_f)).then(() => {
-                console.log('Error:' + this.props.error);
-                if (this.props.error) {
-                    this.setState({open: true, message: this.props.error});
-                }
-            });
+          /**
+           * TODO: make hadnleSignIn method work synchronously
+           */
+          this.props.handleSignIn(email, pass, name_f, surname_f);
+          setTimeout(()=>{
+            if (this.props.error) {
+              this.setState({open: true, message: this.props.error});
+            }
+          }, 1500);
         }
-
-
-        // const name_f = this.refs.name.getValue(),
-        //     surname_f = this.refs.surname.getValue(),
-        //     email = this.refs.email.getValue(),
-        //     pass = this.refs.pass.getValue(),
-        //     conf_pass = this.refs.confirmpass.getValue();
-        // if (name_f.length && surname_f.length && email.length && pass.length && conf_pass.length && pass === conf_pass) {
-        //     this.props.handleSignIn(email, pass, name_f, surname_f);
-        // }
-        // else {
-        //     console.log('error');
-        // }
     }
 
     render() {
