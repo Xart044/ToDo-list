@@ -190,6 +190,7 @@ class SignInForm extends Component {
                     message={this.state.message}
                     action="undo"
                     autoHideDuration={3000}
+                    contentStyle={{height:'auto'}}
                 />
             </div>
 

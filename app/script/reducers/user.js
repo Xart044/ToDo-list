@@ -10,14 +10,15 @@ const initialState = {
     name: '',
     surname: '',
     email: '',
+    categories: {},
     error: '',
-    isLogged: false,
+    isLogged: false
 };
 
 export default function (state = initialState, action) {
     switch (action.type){
         case LOGIN_SUCCES:
-            return {...state, name: action.name, surname: action.surname, email: action.email, error: '', isLogged: true};
+            return {...state, name: action.name, surname: action.surname, email: action.email, categories: action.categories, error: '', isLogged: true};
             break;
         case LOGIN_FAIL:
             return {...state, name: '', surname: '', email: '', error: action.error, isLogged: false};

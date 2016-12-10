@@ -9,7 +9,6 @@
   background-size: cover;
 
   .auth-container {
-    width: 30% !important;
     .auth-tab {
       padding: 0px 20px 20px 20px;
       background-color: white;
@@ -20,4 +19,41 @@
       }
     }
   }
+}
+@media (min-width: 901px){
+  .auth-container {
+    width: 40% !important;
+  }
+}
+@media (min-width: 768px) and (max-width: 900px){
+  .auth-container {
+    width: 60% !important;
+  }
+}
+@media (min-width: 450px) and (max-width: 767px){
+  .auth-container {
+    width: 80% !important;
+  }
+}
+@media (max-width: 449px){
+  .auth-container {
+    width: 100% !important;
+  }
+}
+@media (max-width: 449px){
+  .auth-container {
+    .auth-tab {
+      padding: 0px 20px 20px 20px;
+      background-color: white;
+      .auth-btn {
+        display: flex;
+        flex-direction: column-reverse;
+        min-height: 80px;
+        justify-content:center;
+        align-items:center;
+        margin:20px 0px 10px 0px;
+        justify-content: space-between;
+      }
+    }
+  }  
 }
