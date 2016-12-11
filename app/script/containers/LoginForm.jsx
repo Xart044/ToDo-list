@@ -13,6 +13,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import Checkbox from 'material-ui/Checkbox';
+import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
     label: {
@@ -32,6 +33,24 @@ const styles = {
 
 
 class LoginForm extends Component {
+  state = {
+    open: false,
+    message: ''
+  };
+  handleLoginValidate(){
+    const email = this.refs.email.getValue(),
+          pass = this.refs.pass.getValue();
+    this.setState({
+      open: false,
+      message: ''
+    });
+    this.props.handleLogin(email, pass);
+    setTimeout(()=>{
+      if (this.props.user.error) {
+        this.setState({open: true, message: this.props.user.error});
+      }
+    }, 1500);    
+  }
     render() {
         return (
             <div className="login-wrapper">
@@ -43,6 +62,7 @@ class LoginForm extends Component {
                                        floatingLabelText="E-mail"
                                        type="email"
                                        ref="email"
+                                       id="email"
                                        floatingLabelFixed={false}
                                        required={true}
                                        floatingLabelFocusStyle={styles.label}
@@ -52,6 +72,7 @@ class LoginForm extends Component {
                                        floatingLabelText="Password"
                                        type="password"
                                        ref="pass"
+                                       id="pass"
                                        floatingLabelFixed={false}
                                        required={true}
                                        floatingLabelFocusStyle={styles.label}
@@ -62,11 +83,18 @@ class LoginForm extends Component {
                             />
                             <div className="auth-btn">
                               <Link to="/register"><RaisedButton label="Go to register" secondary={true}/></Link>
-                              <RaisedButton label="Log in" primary={true} onClick={() =>this.props.handleLogin(this.refs.email.getValue(), this.refs.pass.getValue())}/>
+                              <RaisedButton label="Log in" primary={true} onClick={this.handleLoginValidate.bind(this)}/>
                             </div>
                         </div>
                     </Tab>
                 </Tabs>
+                <Snackbar
+                    open={this.state.open}
+                    message={this.state.message}
+                    action="undo"
+                    autoHideDuration={3000}
+                    contentStyle={{height:'auto'}}
+                />
             </div>
         );
     }

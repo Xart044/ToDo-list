@@ -5,7 +5,6 @@ import {hashHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {handleSignIn} from '../actions/UserActions'
-import Snackbar from 'material-ui/Snackbar';
 //styles
 import '../styles/login.scss';
 
@@ -13,6 +12,7 @@ import '../styles/login.scss';
 import TextField from 'material-ui/TextField';
 import {Tabs, Tab} from 'material-ui/Tabs';
 import RaisedButton from 'material-ui/RaisedButton';
+import Snackbar from 'material-ui/Snackbar';
 
 const styles = {
     label: {
@@ -75,10 +75,10 @@ class SignInForm extends Component {
         let inputs = this.refs;
         let valid = true;
         const name_f = this.refs.name.getValue(),
-            surname_f = this.refs.surname.getValue(),
-            email = this.refs.email.getValue(),
-            pass = this.refs.pass.getValue(),
-            conf_pass = this.refs.confirmpass.getValue();
+              surname_f = this.refs.surname.getValue(),
+              email = this.refs.email.getValue(),
+              pass = this.refs.pass.getValue(),
+              conf_pass = this.refs.confirmpass.getValue();
         for (var key in inputs) {
             if (!inputs[key].getValue()) {
                 this.setState({['errorText' + key]: 'This field is required'});
