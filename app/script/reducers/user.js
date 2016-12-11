@@ -9,8 +9,6 @@ import {
 const initialState = {
     name: '',
     surname: '',
-    email: '',
-    categories: {},
     error: '',
     isLogged: false
 };
@@ -18,19 +16,19 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type){
         case LOGIN_SUCCES:
-            return {...state, name: action.name, surname: action.surname, email: action.email, categories: action.categories, error: '', isLogged: true};
+            return {...state, name: action.name, surname: action.surname, error: '', isLogged: true};
             break;
         case LOGIN_FAIL:
-            return {...state, name: '', surname: '', email: '', error: action.error, isLogged: false};
+            return {...state, name: '', surname: '', error: action.error, isLogged: false};
             break;
         case SIGNOUT_SUCCESS:
-            return {...state, name: '', surname: '', email: '', error: '', isLogged: false};
+            return {...state, name: '', surname: '', error: '', isLogged: false};
             break;
         case REGISTR_SUCCES:
-            return {...state, name: action.name, surname: action.surname, email: action.email, error: '', isLogged: true};
+            return {...state, name: action.name, surname: action.surname, error: '', isLogged: true};
             break;
         case REGISTER_FAIL:
-            return {...state, name: '', surname: '', email: '', error: action.error, isLogged: false};
+            return {...state, name: '', surname: '', error: action.error, isLogged: false};
             break;
         default:
             return state;

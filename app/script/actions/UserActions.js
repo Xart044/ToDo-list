@@ -19,7 +19,6 @@ export const HandleLoginWithoutPass = (user) => {
         .then((val)=>{
             dispatch({
                 type: LOGIN_SUCCES,
-                email: user.email,
                 name: val.name,
                 surname: val.surname,
             });
@@ -44,7 +43,6 @@ export const handleLogin = (email, pass) => {
             .then((val)=>{
                 dispatch({
                     type: LOGIN_SUCCES,
-                    email: email,
                     name: val.name,
                     surname: val.surname,
                 });
@@ -66,7 +64,6 @@ export const handleSignIn = (email,pass,name,surname) => {
         .then((user)=>{
             dispatch({
                 type: REGISTR_SUCCES,
-                email: email,
                 name: name,
                 surname: surname,
             });
@@ -75,7 +72,6 @@ export const handleSignIn = (email,pass,name,surname) => {
             userRef.set({
               name: name,
               surname: surname,
-              notes: []
             })
             hashHistory.push('/user');
         })

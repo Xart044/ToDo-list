@@ -6,24 +6,23 @@ import {
 } from '../constants/Tasks'
 
 const initialState = {
-    name: '',
-    done: false,
+    tasks: [],
     error: ''
 };
 
 export default function (state = initialState, action) {
     switch (action.type){
         case TASKS_CREATE_SUCCESS:
-            return {...state, name: action.name, done: false, error: ''};
+            return {...state, tasks: action.tasks, error: ''};
             break;
         case TASKS_CREATE_FAIL:
-            return {...state, name: '', done: false, error: action.error};
+            return {...state, error: action.error};
             break;
         case TASKS_REMOVE_SUCCESS:
-            return {...state, name: '', done: false, error: ''};
+            return {...state, tasks: action.tasks, error: ''};
             break;
         case TASKS_REMOVE_FAIL:
-            return {...state, name: action.name, done: action.done, error: action.error};
+            return {...state, error: action.error};
             break;
         default:
             return state;

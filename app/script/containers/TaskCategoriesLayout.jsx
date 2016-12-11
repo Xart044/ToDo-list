@@ -1,25 +1,82 @@
 //base
 import React from 'react';
-
+import {Link} from 'react-router';
+import {hashHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {loadCategories,categoryCreate,categoryRemove} from '../actions/CategoryActions'
+import Snackbar from 'material-ui/Snackbar';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+import ContentRemove from 'material-ui/svg-icons/content/clear';
 //styles
 
 //components
+import TextField from 'material-ui/TextField';
+
+class TaskCategoriesLayout extends React.Component {
 
 
-export default class TaskCategoriesLayout extends React.Component {
-  static propTypes = {
-    name: React.PropTypes.string,
-  };
+    constructor(props) {
+        super(props);
+    }
 
-  constructor(props) {
-    super(props);
-  }
+    componentWillMount() {
+        this.props.loadCategories();
+    }
 
-  render() {
-    return (
-      <div>
-      	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus quae porro accusantium velit error atque dolorem, inventore, reprehenderit provident vel? Modi nam ex placeat quaerat laudantium amet, aspernatur a eum blanditiis iure aliquid error praesentium voluptate vero dolores quia quo perspiciatis nobis reprehenderit iusto repellat provident maiores quidem accusamus deleniti! Quasi, non, dolorem? Temporibus repellat aut dolorem nemo, accusantium quos minus incidunt deleniti nulla. Adipisci rem itaque quam nam deleniti iusto veritatis iure vel eaque a repellendus cum tempore dignissimos quisquam, numquam ab unde illum ipsam eveniet nemo quaerat illo perferendis corporis. Iusto minima placeat, non nostrum, ratione eius quo exercitationem. Qui debitis, sint distinctio enim. Officiis assumenda quas magni quae deserunt, nostrum ea, est voluptate aperiam, mollitia omnis in nemo optio rerum sequi quis corrupti dolore sapiente, soluta debitis doloribus suscipit voluptates. Ipsam obcaecati debitis, numquam accusantium harum incidunt tempore doloremque vero magni animi odit, aliquam adipisci commodi sunt autem aspernatur modi perspiciatis delectus ad voluptas libero ullam ea consectetur. Nam est illum quam deleniti repellendus, deserunt placeat beatae atque reiciendis, rerum, dolorum, excepturi architecto dolor veniam non ipsum natus earum itaque consequuntur et minima! Recusandae, nisi, maxime? Quasi soluta dolorum illum accusamus culpa quis minus fugit explicabo consectetur.
-      </div>
-    );
-  }
+    render() {
+
+        return (
+            <div>
+                <FloatingActionButton onClick={()=>this.props.categoryCreate(this.refs.name.getValue(),this.refs.description.getValue())}>
+                    <ContentAdd />
+                </FloatingActionButton>
+                <TextField
+                           hintText="name"
+                           floatingLabelText="name"
+                           type="name"
+                           ref="name"
+                           floatingLabelFixed={false}
+                           required={true}
+                />
+                <TextField
+                           hintText="description"
+                           floatingLabelText="description"
+                           type="description"
+                           ref="description"
+                           floatingLabelFixed={false}
+                           required={true}
+                />
+                <div>
+                    {
+                        this.props.category.categories.map((el,ind) => {
+                            return <div>
+                                <div key={el.id} data-catId={el.id}>{el.name} - {el.description} - {el.tasks} </div>
+                                    <FloatingActionButton key={ind} mini={true} onClick={()=>this.props.categoryRemove(el.id)}>
+                                        <ContentRemove />
+                                    </FloatingActionButton>
+                                </div>
+                        })
+                    }
+                </div>
+            </div>
+        );
+    }
 }
+
+function mapStateToProps(state) {
+    return {
+        category: state.category
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loadCategories: bindActionCreators(loadCategories, dispatch),
+        categoryCreate: bindActionCreators(categoryCreate, dispatch),
+        categoryRemove: bindActionCreators(categoryRemove, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskCategoriesLayout);

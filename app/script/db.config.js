@@ -10,3 +10,16 @@ firebase.initializeApp(config);
 
 export const ref = firebase.database().ref();
 export const firebaseAuth = firebase.auth();
+
+export function objToArrCategories(obj) {
+    var arr = [];
+    for (var key in obj) {
+        let object={};
+        object.name = obj[key].name;
+        object.description = obj[key].description;
+        object.id = obj[key].id;
+        object.tasks = obj[key].tasks ? obj[key].tasks.length : 0;
+        arr.push(object);
+    }
+    return arr;
+}
