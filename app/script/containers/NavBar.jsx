@@ -22,7 +22,6 @@ export default class UserLayout extends React.Component {
     return (
       <div>  
             <AppBar
-                // iconClassNameRight="muidocs-icon-navigation-expand-more"
                 iconElementLeft={<TaskMenu/>}
                 iconElementRight={<UserMenu/>}
             />

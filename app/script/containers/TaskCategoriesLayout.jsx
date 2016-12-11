@@ -1,7 +1,6 @@
 //base
 import React from 'react';
-import {Link} from 'react-router';
-import {hashHistory} from 'react-router';
+import {Link,hashHistory} from 'react-router';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {loadCategories,categoryCreate,categoryRemove} from '../actions/CategoryActions'
@@ -21,7 +20,7 @@ class TaskCategoriesLayout extends React.Component {
         super(props);
     }
 
-    componentWillMount() {
+    componentDidMount(){
         this.props.loadCategories();
     }
 

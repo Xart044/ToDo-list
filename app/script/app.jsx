@@ -15,6 +15,7 @@ import LoginForm from './containers/LoginForm';
 import SignInForm from './containers/SignInForm';
 import UserLayout from './containers/UserLayout';
 import TaskCategoriesLayout from './containers/TaskCategoriesLayout';
+import clientErrorComponent from './components/clientErrorComponent';
 
 //styles
 import './styles/layout.scss';
@@ -36,6 +37,7 @@ ReactDOM.render(
 						*/}
 					</Route>
 				</Route>
+				<Route path='*' component={clientErrorComponent}></Route>
 			</Router>
         </Provider>,
     App
@@ -46,7 +48,7 @@ ReactDOM.render(
 function requireAuth(nextState, replace, callback) {
     firebaseAuth.onAuthStateChanged(firebaseUser=>{
         if(!firebaseUser){
-            replace('/');
+            replace('/login');
             callback();
         }
         else{

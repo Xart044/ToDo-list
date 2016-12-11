@@ -1,14 +1,17 @@
 //base
 import React from 'react';
-import {Link} from 'react-router';
+import {hashHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {loadCategories} from '../actions/CategoryActions'
 
 //styles
 
 
 
 //components
+import CategoryItem from './CategoryItem';
 import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import SvgIcon from 'material-ui/SvgIcon';
 import IconButton from 'material-ui/IconButton';
@@ -26,7 +29,7 @@ const TaskIcon = () => (
       .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
   </SvgIcon>
 );
-export default class TaskMenu extends React.Component {
+class TaskMenu extends React.Component {
   static propTypes = {
     name: React.PropTypes.string,
   };
@@ -35,7 +38,9 @@ export default class TaskMenu extends React.Component {
     super(props);
     this.state = {open: false};
   }
-
+  componentDidMount() {
+    this.props.loadCategories();
+  }
   handleToggle = () => this.setState({open: !this.state.open});
 
   handleClose = () => this.setState({open: false});
@@ -57,10 +62,26 @@ export default class TaskMenu extends React.Component {
 			open={this.state.open}
 			onRequestChange={(open) => this.setState({open})}
         >
-			<MenuItem onTouchTap={this.handleClose}>Task Category</MenuItem>
-			<MenuItem onTouchTap={this.handleClose}>Task Category 2</MenuItem>
+        {
+          this.props.category.categories.map((el,ind) => {
+              return <CategoryItem key={el.id} path={el.id} name={el.name}/>
+          })
+        }
         </Drawer>
       </div>
     );
   }
 }
+function mapStateToProps(state) {
+    return {
+        category: state.category
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        loadCategories: bindActionCreators(loadCategories, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskMenu);
