@@ -33,24 +33,24 @@ const styles = {
 
 
 class LoginForm extends Component {
-  state = {
-    open: false,
-    message: ''
-  };
-  handleLoginValidate(){
-    const email = this.refs.email.getValue(),
-          pass = this.refs.pass.getValue();
-    this.setState({
+    state = {
       open: false,
       message: ''
-    });
-    this.props.handleLogin(email, pass);
-    setTimeout(()=>{
-      if (this.props.user.error) {
-        this.setState({open: true, message: this.props.user.error});
-      }
-    }, 1500);    
-  }
+    };
+    handleLoginValidate(){
+      this.setState({
+        open: false,
+        message: ''
+      });
+      const email = this.refs.email.getValue(),
+            pass = this.refs.pass.getValue();
+      this.props.handleLogin(email, pass);
+      setTimeout(()=>{
+        if (this.props.user.error) {
+          this.setState({open: true, message: this.props.user.error});
+        }
+      }, 1500);    
+    }
     render() {
         return (
             <div className="login-wrapper">

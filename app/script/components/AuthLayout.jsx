@@ -1,6 +1,10 @@
 //base
 import React, {Component} from 'react';
-import { Link } from 'react-router';
+import {Link,hashHistory} from 'react-router';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {HandleLoginWithoutPass} from '../actions/UserActions'
+import {firebaseAuth} from './../db.config'
 
 //styles
 import './../styles/auth.scss';
@@ -9,7 +13,15 @@ import './../styles/auth.scss';
 import RaisedButton from 'material-ui/RaisedButton';
 
 
-export default class AuthLayout extends Component {
+class AuthLayout extends Component {
+    componentDidMount(){
+        firebaseAuth.onAuthStateChanged(firebaseUser=>{
+            if(firebaseUser){
+                this.props.HandleLoginWithoutPass(firebaseUser);
+                hashHistory.push('/user');
+            }
+        }); 
+    }
     render() {
         return (
             <div className="index-layout">
@@ -40,3 +52,18 @@ export default class AuthLayout extends Component {
         );
     }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+
+function mapDispatchToProps(dispatch) {
+    return {
+        HandleLoginWithoutPass: bindActionCreators(HandleLoginWithoutPass, dispatch)
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthLayout);
