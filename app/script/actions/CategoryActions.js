@@ -104,3 +104,15 @@ export const categoryRemove = (id) => {
 
     }
 }
+
+
+export const categoryEdit = (id, name, description) => {
+    return function (dispatch) {
+        const userId = firebaseAuth.currentUser.uid,
+            usersRef = ref.child('users'),
+            userRef = usersRef.child(userId),
+            categoriesRef = userRef.child('Categories'),
+            categoryRef=categoriesRef.child(id);
+        categoryRef.update({name: name, description: description})
+    }
+}

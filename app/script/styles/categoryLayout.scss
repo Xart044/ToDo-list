@@ -1,0 +1,27 @@
+.category-layout-wrapper{
+  margin-top: 25px;
+  .category-list-container{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    .category-header{
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid black;
+    }
+  }
+}
+
+.category-add-form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.category-menu-item{
+  display: flex;
+  align-items: center;
+}
+
+

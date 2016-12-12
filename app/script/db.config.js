@@ -18,7 +18,8 @@ export function objToArrCategories(obj) {
         object.name = obj[key].name;
         object.description = obj[key].description;
         object.id = obj[key].id;
-        object.tasks = obj[key].tasks ? obj[key].tasks.length : 0;
+        //console.log(Object.keys(obj[key].tasks).length);
+        object.tasks = obj[key].tasks ? Object.keys(obj[key].tasks).length : 0;
         arr.push(object);
     }
     return arr;
