@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {crateStore} from 'redux';
 import {Provider} from 'react-redux';
-import {Router,Route,IndexRoute,hashHistory} from 'react-router';
+import {Router, Route, IndexRoute, hashHistory} from 'react-router';
 import configureStore from './store/configureStore';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import {firebaseAuth} from './db.config'
@@ -25,34 +25,33 @@ const App = document.getElementById('App');
 const store = configureStore();
 
 ReactDOM.render(
-        <Provider store={store}>
-			<Router history={hashHistory}>
-				<Route path='/' component={Layout}>
-					<IndexRoute component={AuthLayout}></IndexRoute>
-					<Route path='/login' component={LoginForm}></Route>
-					<Route path='/register' component={SignInForm}></Route>
-					<Route path='/user' component={UserLayout} onEnter={requireAuth}>
-					<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
-						{/*<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
-						*/}
-					</Route>
-				</Route>
-				<Route path='*' component={clientErrorComponent}></Route>
-			</Router>
-        </Provider>,
+    <Provider store={store}>
+        <Router history={hashHistory}>
+            <Route path='/' component={Layout}>
+                <IndexRoute component={AuthLayout}></IndexRoute>
+                <Route path='/login' component={LoginForm}></Route>
+                <Route path='/register' component={SignInForm}></Route>
+                <Route path='/user' component={UserLayout} onEnter={requireAuth}>
+                    <IndexRoute component={TaskCategoriesLayout}></IndexRoute>
+                    {/*<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
+                     */}
+                </Route>
+            </Route>
+            <Route path='*' component={clientErrorComponent}></Route>
+        </Router>
+    </Provider>,
     App
 );
 
 
-
 function requireAuth(nextState, replace, callback) {
-    firebaseAuth.onAuthStateChanged(firebaseUser=>{
-        if(!firebaseUser){
+    firebaseAuth.onAuthStateChanged(firebaseUser => {
+        if (!firebaseUser) {
             replace('/login');
             callback();
         }
-        else{
+        else {
             callback();
-		}
+        }
     });
 }

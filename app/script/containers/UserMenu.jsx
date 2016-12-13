@@ -13,46 +13,56 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import SvgIcon from 'material-ui/SvgIcon';
+import SignOut from 'material-ui/svg-icons/action/power-settings-new';
+import Settings from 'material-ui/svg-icons/action/settings';
 
-const styles ={
-	color: 'white'
+const style = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: 95
 };
 
 const iconStyle = {
-	color: '#ffffff'
+    color: '#ffffff'
 };
 
+
 class UserMenu extends React.Component {
-  static propTypes = {
-    name: React.PropTypes.string,
-  };
+    static propTypes = {
+        name: React.PropTypes.string,
+    };
 
-  constructor(props) {
-    super(props);
-  }
+    constructor(props) {
+        super(props);
+    }
 
-  render() {
-    return (
-		<IconMenu
-		iconButtonElement={
-				<IconButton iconStyle={iconStyle}>
-					<SvgIcon>
-						<path 
-							d="M9 5.5c.83 0 1.5-.67 1.5-1.5S9.83 2.5 9 2.5 7.5 3.17 7.5 4 8.17
+    render() {
+        return (
+            <IconMenu
+                iconButtonElement={
+                    <IconButton iconStyle={iconStyle}>
+                        <SvgIcon>
+                            <path
+                                d="M9 5.5c.83 0 1.5-.67 1.5-1.5S9.83 2.5 9 2.5 7.5 3.17 7.5 4 8.17
 							5.5 9 5.5zm0 2c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5S9.83 7.5
-							9 7.5zm0 5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" 
-						/>
-					</SvgIcon>
-				</IconButton>
-			}
-			targetOrigin={{horizontal: 'right', vertical: 'top'}}
-			anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
-		>
-			<MenuItem primaryText="Settings" />
-			<MenuItem primaryText="Sign out" onClick={()=>this.props.handleSignOut()}/>
-		</IconMenu>
-    );
-  }
+							9 7.5zm0 5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"
+                            />
+                        </SvgIcon>
+                    </IconButton>
+                }
+                targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                anchorOrigin={{horizontal: 'left', vertical: 'bottom'}}
+            >
+                <MenuItem>
+                    <div style={style}><Settings/>Settings</div>
+                </MenuItem>
+                <MenuItem onClick={() => this.props.handleSignOut()}>
+                    <div style={style}><SignOut/>Sign out</div>
+                </MenuItem>
+            </IconMenu>
+        );
+    }
 }
 function mapStateToProps(state) {
     return {

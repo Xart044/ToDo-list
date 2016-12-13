@@ -15,6 +15,7 @@ import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 import SvgIcon from 'material-ui/SvgIcon';
 import IconButton from 'material-ui/IconButton';
+import AppBar from 'material-ui/AppBar';
 
 const style = {
 	height: ''
@@ -62,9 +63,12 @@ class TaskMenu extends React.Component {
 			open={this.state.open}
 			onRequestChange={(open) => this.setState({open})}
         >
+            <AppBar title="Categories" showMenuIconButton={false}/>
         {
           this.props.category.categories.map((el,ind) => {
-              return <CategoryItem key={el.id} path={el.id} name={el.name}/>
+              if(el.id!='default'){
+                  return <CategoryItem key={el.id} path={el.id} name={el.name} tasks={el.tasks}/>
+              }
           })
         }
         </Drawer>

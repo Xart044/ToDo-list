@@ -37,13 +37,18 @@ class TaskCategoriesLayout extends React.Component {
 
     drawCategoryItem = () => {
 
-        if (this.props.category.categories.length!=0) {
+        if (this.props.category.categories.length>1) {
             return this.props.category.categories.map((el, ind) => {
-                return <Category key={el.id} id={el.id} name={el.name} description={el.description} tasks={el.tasks} deleteHandler={this.props.categoryRemove} editHandler={this.handleOpenEdit}/>
+                if(el.id!='default'){
+                    return <Category key={el.id} id={el.id} name={el.name} description={el.description} tasks={el.tasks} deleteHandler={this.props.categoryRemove} editHandler={this.handleOpenEdit}/>
+                }
             })
         }
-        else {
+        else if(this.props.category.categories.length==0) {
             return <div><img src="app/images/ring.svg"/></div>;
+        }
+        else if(this.props.category.categories.length==1) {
+            return <div>There is no categories here yet. Please, click <ContentAdd /> to add new category)</div>;
         }
     };
 
