@@ -32,10 +32,11 @@ ReactDOM.render(
                 <IndexRoute component={AuthLayout}></IndexRoute>
                 <Route path='/login' component={LoginForm}></Route>
                 <Route path='/register' component={SignInForm}></Route>
-                <Route path='/user' component={UserLayout} onEnter={requireAuth}>
+                <Route path='/categories' component={UserLayout} onEnter={requireAuth}>
                     <IndexRoute component={TaskCategoriesLayout}></IndexRoute>
                     <Route path='/tasks/:catId' component={TasksListLayout}></Route>
-                    {/*<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
+                    {/*
+                        <IndexRoute component={TaskCategoriesLayout}></IndexRoute>
                      */}
                 </Route>
             </Route>

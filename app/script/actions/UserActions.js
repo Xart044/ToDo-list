@@ -46,7 +46,7 @@ export const handleLogin = (email, pass) => {
                             name: val.name,
                             surname: val.surname,
                         });
-                        hashHistory.push('/user');
+                        hashHistory.push('/categories');
                     })
             })
             .catch(e => {
@@ -74,7 +74,7 @@ export const handleSignIn = (email, pass, name, surname) => {
                     surname: surname,
                     Categories: { defaultcat:{id:'default', name:'default', description:'default'} },
                 });
-                hashHistory.push('/user');
+                hashHistory.push('/categories');
             })
             .catch((e) => {
                 dispatch({
