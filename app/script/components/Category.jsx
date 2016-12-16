@@ -8,7 +8,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DeleteIcon from 'material-ui/svg-icons/action/delete-forever';
 import EditIcon from 'material-ui/svg-icons/image/edit';
 import TasksIcon from 'material-ui/svg-icons/notification/event-note';
-
+import {Link} from 'react-router';
 
 const paperStyle = {
     padding: '20px 40px',
@@ -16,20 +16,20 @@ const paperStyle = {
     textAlign: 'center',
     position: 'relative',
     marginTop: 20,
-    minWidth:350
+    minWidth: 350
 };
 
 const menuStyle = {
     position: 'absolute',
-    right:0,
-    top:0,
+    right: 0,
+    top: 0,
 };
 
 const badgeStyle = {
     position: 'absolute',
     right: 0,
     marginRight: 5,
-    bottom:'-15px',
+    bottom: '-15px',
 
 };
 
@@ -45,6 +45,7 @@ export default class Category extends Component {
 
     render() {
         return (
+
             <Paper style={paperStyle}>
                 <IconMenu
                     style={menuStyle}
@@ -52,20 +53,29 @@ export default class Category extends Component {
                     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                     targetOrigin={{horizontal: 'left', vertical: 'top'}}
                 >
-                    <MenuItem onClick={this.handleEdit.bind(this)}><div className="category-menu-item"><EditIcon/>Edit</div></MenuItem>
-                    <MenuItem onClick={this.handleDelete.bind(this)}><div className="category-menu-item"><DeleteIcon/> Delete</div></MenuItem>
+                    <MenuItem onClick={this.handleEdit.bind(this)}>
+                        <div className="category-menu-item"><EditIcon/> Edit</div>
+                    </MenuItem>
+                    <MenuItem onClick={this.handleDelete.bind(this)}>
+                        <div className="category-menu-item"><DeleteIcon/> Delete</div>
+                    </MenuItem>
                 </IconMenu>
-                <h1 className="category-header">{this.props.name}</h1>
-                <p>{this.props.description}</p>
-                <Badge
+                <Link
+                    to={`/tasks/${this.props.id}`}
+                    style={{textDecoration: 'none', width: '100%', color: 'black', display:'block', height: '100%'}} activeStyle={{color: 'black'}}>
+                    <h1 className="category-header">{this.props.name}</h1>
+                    <p>{this.props.description}</p>
+                    <Badge
 
-                    style={badgeStyle}
-                    badgeContent={this.props.tasks}
-                    primary={true}
-                >
-                    <TasksIcon />
-                </Badge>
+                        style={badgeStyle}
+                        badgeContent={this.props.tasks}
+                        primary={true}
+                    >
+                        <TasksIcon />
+                    </Badge>
+                </Link>
             </Paper>
+
         );
     }
 }

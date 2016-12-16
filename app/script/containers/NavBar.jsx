@@ -1,6 +1,7 @@
 // base
 import React from 'react';
 import {Link} from 'react-router';
+import {connect} from 'react-redux';
 
 //styles
 
@@ -9,7 +10,7 @@ import UserMenu from './UserMenu';
 import TaskMenu from './TaskMenu';
 import AppBar from 'material-ui/AppBar';
 
-export default class UserLayout extends React.Component {
+class UserLayout extends React.Component {
   static propTypes = {
     name: React.PropTypes.string,
   };
@@ -22,6 +23,7 @@ export default class UserLayout extends React.Component {
     return (
       <div>  
             <AppBar
+                title={this.props.user.name + '`s tasks'}
                 iconElementLeft={<TaskMenu/>}
                 iconElementRight={<UserMenu/>}
             />
@@ -29,3 +31,12 @@ export default class UserLayout extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    }
+}
+
+export default connect(mapStateToProps)(UserLayout);
+

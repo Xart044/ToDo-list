@@ -16,6 +16,7 @@ import SignInForm from './containers/SignInForm';
 import UserLayout from './containers/UserLayout';
 import TaskCategoriesLayout from './containers/TaskCategoriesLayout';
 import clientErrorComponent from './components/clientErrorComponent';
+import TasksListLayout from './containers/TasksListLayout';
 
 //styles
 import './styles/layout.scss';
@@ -33,6 +34,7 @@ ReactDOM.render(
                 <Route path='/register' component={SignInForm}></Route>
                 <Route path='/user' component={UserLayout} onEnter={requireAuth}>
                     <IndexRoute component={TaskCategoriesLayout}></IndexRoute>
+                    <Route path='/tasks/:catId' component={TasksListLayout}></Route>
                     {/*<IndexRoute component={TaskCategoriesLayout}></IndexRoute>
                      */}
                 </Route>

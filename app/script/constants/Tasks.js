@@ -1,0 +1,3 @@
+export const TASKS_LOAD_SUCCESS = 'TASKS_LOAD_SUCCESS'
+export const TASKS_LOAD_FAIL = 'TASKS_LOAD_FAIL'
+

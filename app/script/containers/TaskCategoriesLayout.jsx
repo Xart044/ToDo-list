@@ -32,7 +32,8 @@ class TaskCategoriesLayout extends React.Component {
         dialog: '',
         id: '',
         name: '',
-        description: ''
+        description: '',
+        title:''
     };
 
     drawCategoryItem = () => {
@@ -60,16 +61,16 @@ class TaskCategoriesLayout extends React.Component {
 
     handleChangeDescription = (event) => {
         this.setState({
-            description: event.currentTarget.value,
+            description: event.target.value,
         });
     };
 
     handleOpenAdd = () => {
-        this.setState({open: true, dialog: 'add'});
+        this.setState({open: true, dialog: 'add', title: 'Add category'});
     };
 
     handleOpenEdit = (id, name, description) => {
-        this.setState({open: true, dialog: 'edit', id: id, name: name, description: description});
+        this.setState({open: true, dialog: 'edit', id: id, name: name, description: description, title: 'Edit category'});
     };
 
     handleClose = () => {
@@ -125,7 +126,7 @@ class TaskCategoriesLayout extends React.Component {
                 </div>
 
                 <Dialog
-                    title="Add category"
+                    title={this.state.title}
                     contentStyle={{width: '30%'}}
                     actions={actions}
                     modal={false}

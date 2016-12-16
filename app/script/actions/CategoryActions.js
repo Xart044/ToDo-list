@@ -88,7 +88,8 @@ export const categoryCreate = (name, description) => {
         newCatRef.set({
             id: categoryKey,
             name: name,
-            description: description
+            description: description,
+            tasks:{defaultTsk:{id:'default', text:'default', done:true}}
         });
     }
 }

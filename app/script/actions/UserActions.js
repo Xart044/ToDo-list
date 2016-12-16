@@ -22,7 +22,7 @@ export const HandleLoginWithoutPass = (user) => {
                     name: val.name,
                     surname: val.surname,
                 });
-                hashHistory.push('/user');
+                //hashHistory.push('/user');
             })
             .catch((e) => {
                 console.log(e);

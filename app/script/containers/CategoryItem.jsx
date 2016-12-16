@@ -12,23 +12,26 @@ export default class CategoryItem extends React.Component {
         super(props);
     }
 
+
     render() {
         return (
             /**
              * fix: create category component where you can operate your tasks
              * and then change route to <Link to={`/category/${el.id}`}> instead of <Link to={`/user/${el.id}`}>
              */
-            <Link to={`/user/${this.props.path}`} style={{textDecoration: 'none'}}>
-                <MenuItem onTouchTap={this.handleClose}>
+
+            <Link to={`/tasks/${this.props.path}`} style={{textDecoration: 'none'}}>
+                <MenuItem onTouchTap={()=>{this.props.handleClose()}}>
                     {this.props.name}
                     <Badge
-                        style={{padding:'0 0 0 5px'}}
-                        badgeStyle={{position:'static'}}
+                        style={{padding: '0 0 0 5px'}}
+                        badgeStyle={{position: 'static'}}
                         badgeContent={this.props.tasks}
                         primary={true}
                     />
                 </MenuItem>
             </Link>
+
         );
     }
 }
