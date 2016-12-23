@@ -21,15 +21,18 @@ export default class CategoryItem extends React.Component {
              */
 
             <Link to={`/tasks/${this.props.path}`} style={{textDecoration: 'none'}}>
-                <MenuItem onTouchTap={()=>{this.props.handleClose()}}>
-                    {this.props.name}
-                    <Badge
-                        style={{padding: '0 0 0 5px'}}
-                        badgeStyle={{position: 'static'}}
-                        badgeContent={this.props.tasks}
-                        primary={true}
-                    />
-                </MenuItem>
+                <MenuItem
+                    rightIcon={
+                        <Badge
+                            badgeContent={this.props.tasks}
+                            primary={true}
+                        />
+                    }
+                    onTouchTap={() => {
+                        this.props.handleClose()
+                    }}
+                    primaryText={this.props.name}
+                />
             </Link>
 
         );

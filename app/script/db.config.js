@@ -9,6 +9,9 @@ const config = {
 firebase.initializeApp(config);
 
 export const ref = firebase.database().ref();
+export const itRef = firebase.database();
+export const storage = firebase.storage();
+export const storageRef = storage.ref();
 export const firebaseAuth = firebase.auth();
 
 export function objToArrCategories(obj) {
@@ -25,7 +28,7 @@ export function objToArrCategories(obj) {
           }
         }
         object.tasks = taskCount;
-        //object.tasks = obj[key].tasks ? Object.keys(obj[key].tasks).length-1 : 0;
+        object.allTasks = obj[key].tasks ? Object.keys(obj[key].tasks).length-1 : 0;
         arr.push(object);
     }
     return arr;

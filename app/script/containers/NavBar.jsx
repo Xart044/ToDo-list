@@ -19,13 +19,15 @@ class UserLayout extends React.Component {
     super(props);
   }
 
+
   render() {
     return (
       <div>  
             <AppBar
-                title={this.props.user.name + '`s tasks'}
+                title={this.props.taskCat}
                 iconElementLeft={<TaskMenu/>}
                 iconElementRight={<UserMenu/>}
+                iconStyleRight={{display:'flex', alignItems:'center', marginTop:0}}
             />
       </div>
     );
@@ -34,7 +36,7 @@ class UserLayout extends React.Component {
 
 function mapStateToProps(state) {
     return {
-        user: state.user
+        taskCat: state.tasks.category
     }
 }
 

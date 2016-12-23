@@ -11,6 +11,15 @@ import {firebaseAuth} from './../db.config'
 //components
 import NavBar from './NavBar';
 
+const style = {
+    preloader: {
+        width: '100%',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+};
 
 class UserLayout extends React.Component {
     static propTypes = {
@@ -34,7 +43,7 @@ class UserLayout extends React.Component {
             return <div><NavBar/>{this.props.children}</div>
         }
         else{
-            return <div style={{width: '100%', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}><img src="app/images/ring.svg"/></div>;
+            return <div style={style.preloader}><img src="app/images/ring.svg"/></div>;
         }
     }
 

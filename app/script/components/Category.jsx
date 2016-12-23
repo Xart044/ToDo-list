@@ -10,28 +10,29 @@ import EditIcon from 'material-ui/svg-icons/image/edit';
 import TasksIcon from 'material-ui/svg-icons/notification/event-note';
 import {Link} from 'react-router';
 
-const paperStyle = {
-    padding: '20px 40px',
-    width: '32%',
-    textAlign: 'center',
-    position: 'relative',
-    marginTop: 20,
-    minWidth: 350
-};
-
-const menuStyle = {
-    position: 'absolute',
-    right: 0,
-    top: 0,
-};
-
-const badgeStyle = {
-    position: 'absolute',
-    right: 0,
-    marginRight: 5,
-    bottom: '-15px',
-
-};
+const style = {
+    paper: {
+        padding: '20px 40px',
+        width: '32%',
+        textAlign: 'center',
+        position: 'relative',
+        marginTop: 20,
+        minWidth: 350
+    },
+    badge: {
+        position: 'absolute',
+        right: 0,
+        marginRight: 5,
+        bottom: '-15px',
+    },
+    link: {
+        textDecoration: 'none',
+        width: '100%',
+        color: 'black',
+        display: 'block',
+        height: '100%'
+    }
+}
 
 
 export default class Category extends Component {
@@ -46,9 +47,9 @@ export default class Category extends Component {
     render() {
         return (
 
-            <Paper style={paperStyle}>
+            <Paper style={style.paper}>
                 <IconMenu
-                    style={menuStyle}
+                    style={{position: 'absolute', right: 0, top: 0, visibility: this.props.visibility}}
                     iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
                     anchorOrigin={{horizontal: 'right', vertical: 'top'}}
                     targetOrigin={{horizontal: 'left', vertical: 'top'}}
@@ -62,12 +63,13 @@ export default class Category extends Component {
                 </IconMenu>
                 <Link
                     to={`/tasks/${this.props.id}`}
-                    style={{textDecoration: 'none', width: '100%', color: 'black', display:'block', height: '100%'}} activeStyle={{color: 'black'}}>
+                    style={style.link}
+                    activeStyle={{color: 'black'}}
+                >
                     <h1 className="category-header">{this.props.name}</h1>
                     <p>{this.props.description}</p>
                     <Badge
-
-                        style={badgeStyle}
+                        style={style.badge}
                         badgeContent={this.props.tasks}
                         primary={true}
                     >

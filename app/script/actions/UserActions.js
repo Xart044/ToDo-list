@@ -3,15 +3,15 @@ import {
     LOGIN_FAIL,
     REGISTR_SUCCES,
     REGISTER_FAIL,
-    SIGNOUT_SUCCESS
+    SIGNOUT_SUCCESS,
+    LOAD_PHOTO
 } from '../constants/User'
 import {hashHistory} from 'react-router';
-import {ref, firebaseAuth} from './../db.config';
+import {ref, itRef, firebaseAuth, storageRef} from './../db.config';
 
 export const HandleLoginWithoutPass = (user) => {
     return function (dispatch) {
-        const usersRef = ref.child('users'),
-            userRef = usersRef.child(user.uid);
+        const userRef = itRef.ref('users/' + user.uid);
         userRef.once('value')
             .then((snap) => {
                 return snap.val();
@@ -21,8 +21,8 @@ export const HandleLoginWithoutPass = (user) => {
                     type: LOGIN_SUCCES,
                     name: val.name,
                     surname: val.surname,
+                    photo: val.photo
                 });
-                //hashHistory.push('/user');
             })
             .catch((e) => {
                 console.log(e);
@@ -34,8 +34,7 @@ export const handleLogin = (email, pass) => {
     return function (dispatch) {
         firebaseAuth.signInWithEmailAndPassword(email, pass)
             .then((user) => {
-                const usersRef = ref.child('users'),
-                    userRef = usersRef.child(user.uid);
+                const userRef = itRef.ref('users/' + user.uid);
                 userRef.once('value')
                     .then((snap) => {
                         return snap.val();
@@ -45,6 +44,7 @@ export const handleLogin = (email, pass) => {
                             type: LOGIN_SUCCES,
                             name: val.name,
                             surname: val.surname,
+                            photo: val.photo
                         });
                         hashHistory.push('/user');
                     })
@@ -66,13 +66,27 @@ export const handleSignIn = (email, pass, name, surname) => {
                     type: REGISTR_SUCCES,
                     name: name,
                     surname: surname,
+                    photo: 'no'
                 });
-                const usersRef = ref.child('users'),
-                    userRef = usersRef.child(user.uid);
+                const userRef = itRef.ref('users/' + user.uid);
                 userRef.set({
                     name: name,
                     surname: surname,
-                    Categories: { defaultcat:{id:'default', name:'default', description:'default'} },
+                    photo: 'no',
+                    Categories: {
+                        all: {
+                            id: 'all',
+                            name: 'All tasks',
+                            description: 'Tasks from all categories',
+                            tasks: {
+                                defaultTsk: {
+                                    id: 'default',
+                                    text: 'default',
+                                    done: true
+                                }
+                            }
+                        }
+                    },
                 });
                 hashHistory.push('/user');
             })
@@ -97,5 +111,24 @@ export const handleSignOut = () => {
             .catch((e) => {
                 console.log(e);
             })
+    };
+};
+
+export const loadPhoto = (file) => {
+    return function (dispatch) {
+        const userId = firebaseAuth.currentUser.uid;
+        const userRef = itRef.ref('users/' + userId);
+        let imgRef = storageRef.child(userId).child('avatar');
+        if (file) {
+            imgRef.put(file).then(() => {
+                imgRef.getDownloadURL().then((url) => {
+                    userRef.update({photo: url});
+                    dispatch({
+                        type: LOAD_PHOTO,
+                        photo: url
+                    });
+                })
+            })
+        }
     };
 };

@@ -8,7 +8,7 @@ import {
     CATEGORY_EDIT_FAIL
 } from '../constants/Category'
 import {hashHistory} from 'react-router';
-import {ref, firebaseAuth, objToArrCategories} from './../db.config';
+import {ref, itRef, firebaseAuth, objToArrCategories, objToArrTasks} from './../db.config';
 
 // function categoryUpdate(dispatch) {
 //     const userId = firebaseAuth.currentUser.uid,
@@ -54,9 +54,7 @@ import {ref, firebaseAuth, objToArrCategories} from './../db.config';
 export const loadCategories = () => {
     return function (dispatch) {
         const userId = firebaseAuth.currentUser.uid,
-            usersRef = ref.child('users'),
-            userRef = usersRef.child(userId),
-            categoriesRef = userRef.child('Categories');
+            categoriesRef = itRef.ref('users/' + userId + '/Categories');
         categoriesRef.on('value', function (snap) {
             try {
                 if (snap.val()) {
@@ -80,9 +78,7 @@ export const loadCategories = () => {
 export const categoryCreate = (name, description) => {
     return function (dispatch) {
         const userId = firebaseAuth.currentUser.uid,
-            usersRef = ref.child('users'),
-            userRef = usersRef.child(userId),
-            categoriesRef = userRef.child('Categories');
+            categoriesRef = itRef.ref('users/' + userId + '/Categories');
         let categoryKey = categoriesRef.push().key;
         let newCatRef = categoriesRef.child(categoryKey);
         newCatRef.set({
@@ -97,12 +93,8 @@ export const categoryCreate = (name, description) => {
 export const categoryRemove = (id) => {
     return function (dispatch) {
         const userId = firebaseAuth.currentUser.uid,
-            usersRef = ref.child('users'),
-            userRef = usersRef.child(userId),
-            categoriesRef = userRef.child('Categories'),
-            categoryRef=categoriesRef.child(id);
+            categoryRef = itRef.ref('users/' + userId + '/Categories/' + id);
         categoryRef.remove();
-
     }
 }
 
@@ -110,10 +102,7 @@ export const categoryRemove = (id) => {
 export const categoryEdit = (id, name, description) => {
     return function (dispatch) {
         const userId = firebaseAuth.currentUser.uid,
-            usersRef = ref.child('users'),
-            userRef = usersRef.child(userId),
-            categoriesRef = userRef.child('Categories'),
-            categoryRef=categoriesRef.child(id);
+            categoryRef = itRef.ref('users/' + userId + '/Categories/' + id);
         categoryRef.update({name: name, description: description})
     }
 }

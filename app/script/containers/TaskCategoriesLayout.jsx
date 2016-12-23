@@ -2,23 +2,30 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {loadCategories, categoryCreate, categoryRemove, categoryEdit} from '../actions/CategoryActions'
+import {loadCategories, categoryRemove} from '../actions/CategoryActions'
 //styles
 import './../styles/categoryLayout.scss';
 //components
-import TextField from 'material-ui/TextField';
 import Category from '../components/Category'
+import AddCategoryDialog from '../components/AddCategoryDialog'
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 
-const addBtnStyle = {
-    position: 'fixed',
-    right: 10,
-    bottom: 10,
-    zIndex:100,
+const style = {
+    addBtnStyle:{
+        position: 'fixed',
+        right: 10,
+        bottom: 10,
+        zIndex: 100,
+    },
+    noCategoryCont:{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    }
+
 };
 
 
@@ -33,36 +40,40 @@ class TaskCategoriesLayout extends React.Component {
         id: '',
         name: '',
         description: '',
-        title:''
+        title: ''
     };
 
     drawCategoryItem = () => {
-
-        if (this.props.category.categories.length>1) {
-            return this.props.category.categories.map((el, ind) => {
-                if(el.id!='default'){
-                    return <Category key={el.id} id={el.id} name={el.name} description={el.description} tasks={el.tasks} deleteHandler={this.props.categoryRemove} editHandler={this.handleOpenEdit}/>
-                }
+        let categories = this.props.category.categories;
+        if (categories.length > 1) {
+            return categories.map((el, ind) => {
+                let visible = el.id == 'all' ? 'hidden' : 'visible';
+                return <Category
+                    key={el.id}
+                    id={el.id}
+                    name={el.name}
+                    description={el.description}
+                    tasks={el.tasks}
+                    visibility={visible}
+                    deleteHandler={this.props.categoryRemove}
+                    editHandler={this.handleOpenEdit}/>
             })
         }
-        else if(this.props.category.categories.length==0) {
+        else if (categories.length == 0) {
             return <div><img src="app/images/ring.svg"/></div>;
         }
-        else if(this.props.category.categories.length==1) {
-            return <div>There is no categories here yet. Please, click <ContentAdd /> to add new category)</div>;
+        else if (categories.length == 1) {
+            return <div style={style.noCategoryCont}>
+                <Category
+                    id={categories[0].id}
+                    name={categories[0].name}
+                    description={categories[0].description}
+                    tasks={categories[0].tasks} visibility='hidden'
+                    deleteHandler={this.props.categoryRemove}
+                    editHandler={this.handleOpenEdit}/>
+                <div>There is no categories here yet. Please, click <ContentAdd /> to add new category)</div>
+            </div>;
         }
-    };
-
-    handleChangeName = (event) => {
-        this.setState({
-            name: event.target.value,
-        });
-    };
-
-    handleChangeDescription = (event) => {
-        this.setState({
-            description: event.target.value,
-        });
     };
 
     handleOpenAdd = () => {
@@ -77,84 +88,32 @@ class TaskCategoriesLayout extends React.Component {
         this.setState({open: false, dialog: '', id: '', name: '', description: ''});
     };
 
-    handleCloseAndSave = () => {
-        if (this.state.dialog == 'add') {
-            this.props.categoryCreate(this.refs.name.getValue(), this.refs.description.getValue());
-            this.handleClose();
-        }
-        else if (this.state.dialog == 'edit') {
-            this.props.categoryEdit(this.state.id, this.refs.name.getValue(), this.refs.description.getValue());
-            this.handleClose();
-        }
-    };
-
-
-
     componentWillMount() {
         this.props.loadCategories();
     }
 
     render() {
-        const actions = [
-            <FlatButton
-                label="Cancel"
-                primary={true}
-                onTouchTap={this.handleClose}
-            />,
-            <FlatButton
-                label="Save"
-                primary={true}
-                keyboardFocused={true}
-                onTouchTap={this.handleCloseAndSave}
-            />,
-        ];
-
         return (
             <div className="category-layout-wrapper">
                 <FloatingActionButton
-                    style={addBtnStyle}
+                    style={style.addBtnStyle}
                     onClick={this.handleOpenAdd}
                 >
                     <ContentAdd />
                 </FloatingActionButton>
-
                 <div className="category-list-container">
-
                     {
                         this.drawCategoryItem()
                     }
                 </div>
-
-                <Dialog
-                    title={this.state.title}
-                    contentStyle={{width: '30%'}}
-                    actions={actions}
-                    modal={false}
+                <AddCategoryDialog
+                    id={this.state.id}
                     open={this.state.open}
-                    onRequestClose={this.handleClose}
-                >
-                    <div className="category-add-form"><TextField
-                        value={this.state.name}
-                        onChange={this.handleChangeName.bind(this)}
-                        hintText="Category name"
-                        floatingLabelText="Category name"
-                        type="name"
-                        ref="name"
-                        floatingLabelFixed={false}
-                        required={true}
-                    />
-                        <TextField
-                            value={this.state.description}
-                            onChange={this.handleChangeDescription.bind(this)}
-                            floatingLabelText="Category description"
-                            type="description"
-                            ref="description"
-                            floatingLabelFixed={false}
-                            required={true}
-                            multiLine={true}
-                            rows={2}
-                        /></div>
-                </Dialog>
+                    dialog={this.state.dialog}
+                    title={this.state.title}
+                    name={this.state.name}
+                    description={this.state.description}
+                    handleClose={this.handleClose.bind(this)}/>
             </div>
         );
     }
@@ -169,9 +128,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         loadCategories: bindActionCreators(loadCategories, dispatch),
-        categoryCreate: bindActionCreators(categoryCreate, dispatch),
-        categoryRemove: bindActionCreators(categoryRemove, dispatch),
-        categoryEdit: bindActionCreators(categoryEdit, dispatch)
+        categoryRemove: bindActionCreators(categoryRemove, dispatch)
     }
 }
 
