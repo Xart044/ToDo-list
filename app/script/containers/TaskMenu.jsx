@@ -12,7 +12,11 @@ import CategoryItem from './CategoryItem';
 import Drawer from 'material-ui/Drawer';
 import IconButton from 'material-ui/IconButton';
 import AppBar from 'material-ui/AppBar';
+<<<<<<< HEAD
 import MenuIcon from 'material-ui/svg-icons/navigation/menu';
+=======
+import NavMenuIcon from 'material-ui/svg-icons/navigation/menu';
+>>>>>>> origin/master
 
 const style = {
     link:{
@@ -20,7 +24,13 @@ const style = {
         color: 'white'
     }
 };
+<<<<<<< HEAD
 
+=======
+const TaskIcon = () => (
+    <NavMenuIcon style={iconStyle}/>
+);
+>>>>>>> origin/master
 class TaskMenu extends React.Component {
     static propTypes = {
         name: React.PropTypes.string,

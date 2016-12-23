@@ -18,7 +18,7 @@ class AuthLayout extends Component {
         firebaseAuth.onAuthStateChanged(firebaseUser=>{
             if(firebaseUser){
                 this.props.HandleLoginWithoutPass(firebaseUser);
-                hashHistory.push('/user');
+                hashHistory.push('/categories');
             }
         }); 
     }

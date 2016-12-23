@@ -46,7 +46,7 @@ export const handleLogin = (email, pass) => {
                             surname: val.surname,
                             photo: val.photo
                         });
-                        hashHistory.push('/user');
+                        hashHistory.push('/categories');
                     })
             })
             .catch(e => {
@@ -88,7 +88,7 @@ export const handleSignIn = (email, pass, name, surname) => {
                         }
                     },
                 });
-                hashHistory.push('/user');
+                hashHistory.push('/categories');
             })
             .catch((e) => {
                 dispatch({
