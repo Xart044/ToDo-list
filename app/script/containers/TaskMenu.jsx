@@ -56,7 +56,7 @@ class TaskMenu extends React.Component {
                     open={this.state.open}
                     onRequestChange={(open) => this.setState({open})}
                 >
-                    <Link to="/user" style={style.link}>
+                    <Link to="/categories" style={style.link}>
                         <AppBar title="Categories" showMenuIconButton={false} onClick={()=>this.handleClose()}/>
                     </Link>
 
