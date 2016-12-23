@@ -49,22 +49,11 @@ class Task extends Component {
     }
 
     handleCheck = (e, isChecked, catId) => {
-        if (catId != 'no') {
-            this.props.taskEdit(catId, e.target.id, isChecked);
-        }
-        else {
-            this.props.taskEdit(this.props.params.catId, e.target.id, isChecked);
-        }
+        this.props.taskEdit(catId, e.target.id, isChecked);
     };
 
     handleDelete = (catId, id) => {
-        if (catId != 'no') {
-            this.props.taskRemove(catId, id);
-        }
-        else {
-            this.props.taskRemove(this.props.params.catId, id);
-        }
-
+        this.props.taskRemove(catId, id);
     };
 
 

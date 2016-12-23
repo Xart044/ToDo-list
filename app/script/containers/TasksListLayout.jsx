@@ -83,7 +83,8 @@ class TasksListLayout extends React.Component {
                             return <Task
                                 key={el.id}
                                 id={el.id}
-                                catId={el.catId ? el.catId : 'no'}
+
+                                catId={el.catId ? el.catId : this.props.params.catId}
                                 text={el.text}
                                 date={el.date}
                                 checked={el.done}
@@ -102,7 +103,7 @@ class TasksListLayout extends React.Component {
                             return <Task
                                 key={el.id}
                                 id={el.id}
-                                catId={el.catId ? el.catId : 'no'}
+                                catId={el.catId ? el.catId : this.props.params.catId}
                                 text={el.text}
                                 date={el.date}
                                 checked={el.done}

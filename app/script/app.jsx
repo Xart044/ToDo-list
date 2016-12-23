@@ -35,9 +35,6 @@ ReactDOM.render(
                 <Route path='/categories' component={UserLayout} onEnter={requireAuth}>
                     <IndexRoute component={TaskCategoriesLayout}></IndexRoute>
                     <Route path='/tasks/:catId' component={TasksListLayout}></Route>
-                    {/*
-                        <IndexRoute component={TaskCategoriesLayout}></IndexRoute>
-                     */}
                 </Route>
             </Route>
             <Route path='*' component={clientErrorComponent}></Route>
