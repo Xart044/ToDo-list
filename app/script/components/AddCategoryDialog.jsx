@@ -33,7 +33,7 @@ class AddCategoryDialog extends Component {
     };
 
     handleCloseAndSave = () => {
-        if (this.props.dialog == 'add') {
+        if (this.props.dialog == 'add' && this.refs.name.getValue()!=='') {
             this.props.categoryCreate(this.refs.name.getValue(), this.refs.description.getValue());
             this.props.handleClose();
         }
