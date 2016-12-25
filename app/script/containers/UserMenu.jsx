@@ -1,6 +1,7 @@
 //base
 import React from 'react';
 import {connect} from 'react-redux';
+import { Link } from 'react-router';
 import {bindActionCreators} from 'redux';
 import {handleSignOut, loadPhoto} from '../actions/UserActions'
 //styles
@@ -63,6 +64,10 @@ class UserMenu extends React.Component {
         name: React.PropTypes.string,
     };
 
+    constructor(props) {
+        super(props);
+    }
+    
     state = {
         file: '',
         openMenu: false,
@@ -85,11 +90,6 @@ class UserMenu extends React.Component {
             openMenu: false,
         });
     };
-
-
-    constructor(props) {
-        super(props);
-    }
 
     tasksCount = () => {
         let tasks = this.props.categories.find((el) => {
@@ -220,7 +220,7 @@ class UserMenu extends React.Component {
                     />
                     <Divider style={{marginTop: '5px'}}/>
                     <Menu autoWidth={true}>
-                        <MenuItem leftIcon={<Settings/>} primaryText="Settings" innerDivStyle={styles.menuItem}/>
+                        <Link to='/settings' style={{textDecoration: 'none'}}><MenuItem leftIcon={<Settings/>} primaryText="Settings" innerDivStyle={styles.menuItem}/></Link>
                         <MenuItem leftIcon={<SignOut/>} primaryText="Sign out" innerDivStyle={styles.menuItem} onClick={() => this.props.handleSignOut()}/>
                     </Menu>
                 </Popover>

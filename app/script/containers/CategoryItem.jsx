@@ -15,11 +15,6 @@ export default class CategoryItem extends React.Component {
 
     render() {
         return (
-            /**
-             * fix: create category component where you can operate your tasks
-             * and then change route to <Link to={`/category/${el.id}`}> instead of <Link to={`/user/${el.id}`}>
-             */
-
             <Link to={`/tasks/${this.props.path}`} style={{textDecoration: 'none'}}>
                 <MenuItem
                     rightIcon={
