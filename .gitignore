@@ -1,7 +1,9 @@
-.idea/jsLibraryMappings.xml
-.idea/misc.xml
 *.xml
-.idea/ToDo-list.iml
 /node_modules
 /bower_components
+/build
 npm-debug.log
+.idea/
+.firebaserc
+database.rules.json
+firebase.json

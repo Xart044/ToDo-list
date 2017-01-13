@@ -132,14 +132,14 @@ class TasksListLayout extends React.Component {
 
     render() {
         return (
-            <div style={style.taskContainer}>
+            <div style={style.taskContainer} className="task-layout-container">
                 <AddTask
                     categories={this.props.categories}
                     visibility={this.state.visibility}
                     cat={this.props.params.catId}
                     handleCategoryAdd={this.handleCategoryAdd.bind(this)}
                 />
-                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                <div style={{display: 'flex', justifyContent: 'space-between', flexWrap:'wrap'}}>
                     <FlatButton className="filterBtn" onClick={(e) => {
                         this.handleFilterBtn(e, 'ALL');
                     }} label="All"/>

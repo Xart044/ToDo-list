@@ -6,7 +6,7 @@ import {taskEdit, taskRemove} from '../actions/TaskActions';
 import Paper from 'material-ui/Paper';
 import Checkbox from 'material-ui/Checkbox';
 import DeleteIcon from 'material-ui/svg-icons/content/clear';
-
+import './../styles/taskItem.scss';
 
 const style = {
     taskItem: {
@@ -65,23 +65,27 @@ class Task extends Component {
                 onMouseOver={this.paperOnMouseOver.bind(this)}
                 onMouseOut={this.paperOnMouseOut.bind(this)}
             >
-                <Checkbox
-                    id={this.props.id}
-                    style={{width: '85%'}}
-                    label={this.props.text}
-                    checked={this.props.checked}
-                    labelStyle={{textDecoration: this.props.decoration}}
-                    onCheck={(e, isChecked) => this.handleCheck(e, isChecked, this.props.catId)}
-                />
-                <div style={{color: this.state.color}}>{new Date(this.props.date).toLocaleDateString()}</div>
-                <DeleteIcon
-                    style={{transform: this.state.scale, opacity: this.state.opacity}}
-                    onClick={() => {
-                        this.handleDelete(this.props.catId, this.props.id)
-                    }}
-                    onMouseOver={this.iconOnMouseOver.bind(this)}
-                    onMouseOut={this.iconOnMouseOut.bind(this)}
-                />
+                <div style={{width: '100%'}}>
+                    <Checkbox
+                        className="task-item-checkbox"
+                        id={this.props.id}
+                        label={this.props.text}
+                        checked={this.props.checked}
+                        labelStyle={{textDecoration: this.props.decoration}}
+                        onCheck={(e, isChecked) => this.handleCheck(e, isChecked, this.props.catId)}
+                    />
+                </div>
+                <div className="task-item-info">
+                    <div style={{color: this.state.color}}>{new Date(this.props.date).toLocaleDateString()}</div>
+                    <DeleteIcon
+                        style={{transform: this.state.scale, opacity: this.state.opacity}}
+                        onClick={() => {
+                            this.handleDelete(this.props.catId, this.props.id)
+                        }}
+                        onMouseOver={this.iconOnMouseOver.bind(this)}
+                        onMouseOut={this.iconOnMouseOut.bind(this)}
+                    />
+                </div>
             </Paper>
         );
     }

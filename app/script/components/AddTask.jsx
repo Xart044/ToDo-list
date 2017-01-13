@@ -11,6 +11,7 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import DatePicker from 'material-ui/DatePicker';
 
+import './../styles/addTask.scss';
 
 const style = {
     paper: {
@@ -19,8 +20,10 @@ const style = {
         width: '100%',
         margin: '0 auto',
         backgroundColor: '#F7F7F7',
-        padding: '0 10px'
+        padding: '0 10px',
+        justifyContent: 'space-between'
     },
+
 
 };
 
@@ -64,7 +67,7 @@ class AddTask extends Component {
     handleDateChange = (e, date) => {
         console.log(date.toLocaleDateString());
         this.setState({date: date});
-    }
+    };
 
     handleChangeText = (e) => {
         this.setState({text: e.target.value})
@@ -85,12 +88,14 @@ class AddTask extends Component {
                 this.setState({text: ' ', date: ''})
             }
         }
-    }
+    };
 
     render() {
         return (
-            <Paper style={style.paper}>
+            <Paper style={style.paper} className="add-task_container">
                 <TextField
+                    className="add-task_text"
+                    fullWidth={true}
                     hintText="New task"
                     value={this.state.text}
                     onChange={this.handleChangeText.bind(this)}
@@ -102,42 +107,45 @@ class AddTask extends Component {
                             }
                         }
                     }}
-                    fullWidth={true}
                     floatingLabelText="New task"
                     type="text"
                     ref="task"
                     floatingLabelFixed={false}
                     required={true}
                 />
-                <DatePicker
-                    hintText="Due date"
-                    DateTimeFormat={DateTimeFormat}
-                    locale="ru-RU"
-                    value={this.state.date}
-                    minDate={this.state.minDate}
-                    maxDate={this.state.maxDate}
-                    style={{marginLeft: 20, marginTop: 24}}
-                    onChange={this.handleDateChange.bind(this)}
-                />
-                <SelectField
-                    value={this.state.value}
-                    onChange={this.handleChange.bind(this)}
-                    ref="category"
-                    floatingLabelText="Select category"
-                    style={{marginLeft: 20, display: this.props.visibility}}
-                    autoWidth={true}
-                >
-                    {
-                        this.props.categories.map((el, ind) => {
-                            if (el.id != 'all')
-                                return <MenuItem key={el.id} value={el.id} primaryText={el.name}/>
-                        })
-                    }
-                    <MenuItem leftIcon={<ContentAdd />} value='add' primaryText='Add category'/>
-                </SelectField>
-                <FloatingActionButton onClick={() => this.handleAddTaskBtn()}>
-                    <ContentAdd />
-                </FloatingActionButton>
+                <div className="add-task_row">
+                    <DatePicker
+                        className='add-task_date'
+                        hintText="Due date"
+                        DateTimeFormat={DateTimeFormat}
+                        locale="ru-RU"
+                        value={this.state.date}
+                        minDate={this.state.minDate}
+                        maxDate={this.state.maxDate}
+                        style={{marginLeft: 20, marginTop: 24}}
+                        onChange={this.handleDateChange.bind(this)}
+                    />
+                    <SelectField
+                        className='add-task_category'
+                        value={this.state.value}
+                        onChange={this.handleChange.bind(this)}
+                        ref="category"
+                        floatingLabelText="Category"
+                        style={{marginLeft: 20, display: this.props.visibility}}
+                        autoWidth={true}
+                    >
+                        {
+                            this.props.categories.map((el, ind) => {
+                                if (el.id != 'all')
+                                    return <MenuItem key={el.id} value={el.id} primaryText={el.name}/>
+                            })
+                        }
+                        <MenuItem leftIcon={<ContentAdd />} value='add' primaryText='Add category'/>
+                    </SelectField>
+                    <FloatingActionButton onClick={() => this.handleAddTaskBtn()}>
+                        <ContentAdd />
+                    </FloatingActionButton>
+                </div>
             </Paper>
 
         );

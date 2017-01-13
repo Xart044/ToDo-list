@@ -1,0 +1,46 @@
+.add-task_row {
+  display: flex;
+  align-items: center;
+}
+
+
+
+@media screen and (max-width: 1292px) {
+  .add-task_date > div, .add-task_category {
+    width: 150px !important;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .add-task_date > div, .add-task_category {
+    width: 100px !important;
+  }
+}
+
+@media screen and (max-width: 947px) {
+  .add-task_container {
+    flex-direction: column !important;
+  }
+  .add-task_row{
+    justify-content: space-between !important;
+    width: 100% !important;
+  }
+  .add-task_text {
+    width: 100% !important;
+  }
+  .add-task_date{
+    margin-left: 0px !important;
+  }
+  .add-task_category, .add-task_date{
+    width: 40% !important;
+  }
+  .add-task_date > div {
+    width: 100% !important;
+  }
+}
+
+
+
+@media screen and (max-width: 500px) {
+
+}

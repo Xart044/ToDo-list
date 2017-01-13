@@ -17,7 +17,7 @@ const style = {
         textAlign: 'center',
         position: 'relative',
         marginTop: 20,
-        minWidth: 350
+        minWidth: 320
     },
     badge: {
         position: 'absolute',

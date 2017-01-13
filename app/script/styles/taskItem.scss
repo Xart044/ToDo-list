@@ -1,0 +1,14 @@
+.task-item-info {
+  display: flex;
+  align-items: center;
+}
+
+@media screen and (max-width: 400px) {
+  .task-item-info {
+    font-size: smaller;
+  }
+
+  .task-item-checkbox {
+    font-size: 93%;
+  }
+}
