@@ -33,11 +33,11 @@ class AddCategoryDialog extends Component {
     };
 
     handleCloseAndSave = () => {
-        if (this.props.dialog == 'add' && this.refs.name.getValue()!=='') {
+        if (this.props.dialog == 'add' && this.refs.name.getValue().length!==0) {
             this.props.categoryCreate(this.refs.name.getValue(), this.refs.description.getValue());
             this.props.handleClose();
         }
-        else if (this.props.dialog == 'edit') {
+        else if (this.props.dialog == 'edit' && this.refs.name.getValue().length!==0) {
             this.props.categoryEdit(this.props.id, this.refs.name.getValue(), this.refs.description.getValue());
             this.props.handleClose();
         }

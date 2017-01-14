@@ -78,11 +78,11 @@ class AddTask extends Component {
         if (this.state.date) {
             date = this.state.date;
         }
-        if (this.refs.task.getValue() && this.props.cat !== 'all') {
+        if (this.refs.task.getValue().trim().length!==0 && this.props.cat !== 'all') {
             this.props.taskCreate(this.props.cat, this.refs.task.getValue(), date);
             this.setState({text: ' ', date: ''})
         }
-        else if (this.refs.task.getValue() && this.props.cat == 'all') {
+        else if (this.refs.task.getValue().trim().length!==0 && this.props.cat == 'all') {
             if (this.state.value != null) {
                 this.props.taskCreate(this.state.value, this.refs.task.getValue(), date);
                 this.setState({text: ' ', date: ''})
