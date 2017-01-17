@@ -6,7 +6,7 @@ import {bindActionCreators} from 'redux';
 import { firebaseAuth, itRef } from './../db.config'
 
 //styles
-import './../styles/settings.scss';
+
 
 //components
 import TextField from 'material-ui/TextField';
@@ -152,7 +152,7 @@ class SettingsLayout extends React.Component {
     }
     render() {
         return (
-            <div className="settings-container" style={{width: '40%', margin: '0 auto'}}>
+            <div style={{width: 600, margin: '0 auto'}}>
                 Edit Profile:
                 <div style={{marginTop: '30px'}}>Input nothing if you dont want to change email</div>
                 <TextField 

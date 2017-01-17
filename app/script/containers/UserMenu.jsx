@@ -226,7 +226,7 @@ class UserMenu extends React.Component {
                 </Popover>
                 <Dialog
                     title='Add avatar'
-                    contentClassName="avatar-dialog-content"
+                    contentStyle={{width: '30%'}}
                     bodyStyle={styles.dialogBody}
                     actions={actions}
                     modal={false}
